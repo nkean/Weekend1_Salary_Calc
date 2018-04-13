@@ -1,5 +1,7 @@
 console.log('Javascript has loaded');
 
+let totalMonthlyCosts = 0;
+
 $(document).ready(onReady);
 
 function onReady() {
@@ -29,4 +31,9 @@ function clearInputs() {
     $('#employeeIdInput').val('');
     $('#employeeTitleInput').val('');
     $('#annualSalaryInput').val('');   
+}
+
+function updateMonthlyCosts() {
+    let newEmployeeSalary = $('#annualSalaryInput').val();
+    totalMonthlyCosts += (newEmployeeSalary / 12); // add new employee monthly salary to total monthly costs
 }
