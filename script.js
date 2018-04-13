@@ -7,11 +7,13 @@ $(document).ready(onReady);
 function onReady() {
     console.log('jQuery has loaded');
     $('#addEmployeeButton').click(addEmployeeHandler);
+    updateMonthlyCosts();
 }
 
 function addEmployeeHandler() {
     console.log('addEmployeeButton clicked');
     addNewEmployee();
+    updateMonthlyCosts();
     clearInputs();
 }
 
@@ -36,4 +38,5 @@ function clearInputs() {
 function updateMonthlyCosts() {
     let newEmployeeSalary = $('#annualSalaryInput').val();
     totalMonthlyCosts += (newEmployeeSalary / 12); // add new employee monthly salary to total monthly costs
+    $('#totalMonthlyCosts').text('Total Monthly: $' + totalMonthlyCosts.toFixed(2));
 }
