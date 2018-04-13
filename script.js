@@ -10,6 +10,7 @@ function onReady() {
 function addEmployeeHandler() {
     console.log('addEmployeeButton clicked');
     addNewEmployee();
+    clearInputs();
 }
 
 function addNewEmployee() {
@@ -17,7 +18,15 @@ function addNewEmployee() {
     let lastName = '<td>' + $('#lastNameInput').val() + '</td>';
     let employeeId = '<td>' + $('#employeeIdInput').val() + '</td>';
     let employeeTitle = '<td>' + $('#employeeTitleInput').val() + '</td>';
-    let employeeSalary = '<td>$ ' + $('#annualSalaryInput').val() + '</td>';
+    let employeeSalary = '<td>$' + $('#annualSalaryInput').val() + '</td>';
 
     $('#employeeList').append('<tr>' + firstName + lastName + employeeId + employeeTitle + employeeSalary + '</tr>');
+}
+
+function clearInputs() {
+    $('#firstNameInput').val('');
+    $('#lastNameInput').val('');
+    $('#employeeIdInput').val('');
+    $('#employeeTitleInput').val('');
+    $('#annualSalaryInput').val('');   
 }
