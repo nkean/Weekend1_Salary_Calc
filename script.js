@@ -9,7 +9,7 @@ function onReady() {
 
 function addEmployeeHandler() {
     console.log('addEmployeeButton clicked');
-
+    addNewEmployee();
 }
 
 function addNewEmployee() {
