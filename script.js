@@ -38,6 +38,9 @@ function clearInputs() {
 function updateMonthlyCosts() {
     let newEmployeeSalary = $('#annualSalaryInput').val();
     totalMonthlyCosts += (newEmployeeSalary / 12); // add new employee monthly salary to total monthly costs
-    let monthlyCostFormatted = Number(totalMonthlyCosts.toFixed(2)).toLocaleString('en');
+    let monthlyCostFormatted = Number(totalMonthlyCosts.toFixed(2)).toLocaleString('en'); // format monthly costs to include commas for large numbers
     $('#totalMonthlyCosts').text('Total Monthly: $' + monthlyCostFormatted);
+    if (totalMonthlyCosts > 20000) {
+        $('#totalMonthlyCosts').css('color', 'red');
+    }
 }
