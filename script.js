@@ -22,7 +22,7 @@ function addNewEmployee() {
     let lastName = '<td>' + $('#lastNameInput').val() + '</td>';
     let employeeId = '<td>' + $('#employeeIdInput').val() + '</td>';
     let employeeTitle = '<td>' + $('#employeeTitleInput').val() + '</td>';
-    let employeeSalary = '<td>$' + $('#annualSalaryInput').val() + '</td>';
+    let employeeSalary = '<td>$' + Number($('#annualSalaryInput').val()).toLocaleString('en') + '</td>';
 
     $('#employeeList').append('<tr>' + firstName + lastName + employeeId + employeeTitle + employeeSalary + '</tr>');
 }
@@ -38,5 +38,6 @@ function clearInputs() {
 function updateMonthlyCosts() {
     let newEmployeeSalary = $('#annualSalaryInput').val();
     totalMonthlyCosts += (newEmployeeSalary / 12); // add new employee monthly salary to total monthly costs
-    $('#totalMonthlyCosts').text('Total Monthly: $' + totalMonthlyCosts.toFixed(2));
+    let monthlyCostFormatted = Number(totalMonthlyCosts.toFixed(2)).toLocaleString('en');
+    $('#totalMonthlyCosts').text('Total Monthly: $' + monthlyCostFormatted);
 }
