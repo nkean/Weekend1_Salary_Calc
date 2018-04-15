@@ -11,31 +11,42 @@
 </head>
 <body>
     <header>
-        <h2>Salary Calculator</h2>
+        <h1>Salary Calculator</h1>
     </header>
-    <h3>Add Employee</h3>
-    <input id="firstNameInput" type="text" placeholder="First Name">
-    <input id="lastNameInput" type="text" placeholder="Last Name">
-    <input id="employeeIdInput" type="number" placeholder="ID">
-    <input id="employeeTitleInput" type="text" placeholder="Title">
-    <input id="annualSalaryInput" type="number" placeholder="Annual Salary">
-    <br/>
-    <button id="addEmployeeButton">Submit</button>
-    <h3>Employees</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Annual Salary</th>
-            </tr>
-        </thead>
-        <tbody id="employeeList">
-            <tr></tr>
-        </tbody>
-    </table>
-    <h3 id="totalMonthlyCosts"></h3>
+    <div id="mainContent">
+        <br/> <br/>
+        <h3>Add Employee</h3>
+        <div id="inputDiv">
+            <input id="firstNameInput" type="text" placeholder="First Name">
+            <input id="lastNameInput" type="text" placeholder="Last Name">
+            <input id="employeeIdInput" type="number" placeholder="ID">
+            <input id="employeeTitleInput" type="text" placeholder="Title">
+            <input id="annualSalaryInput" type="number" placeholder="Annual Salary">
+        </div>
+        <br/>
+        <button id="addEmployeeButton">Submit</button>
+        <h3>Employees</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Annual Salary</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="employeeList">
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6"></td>
+                </tr>
+            </tfoot>
+        </table>
+        <h3 id="totalMonthlyCosts"></h3>
+    </div>
 </body>
 </html>
