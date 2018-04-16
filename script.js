@@ -62,7 +62,7 @@ function updateMonthlyCosts () {
     } // end if
     else {
         $('#totalMonthlyCosts').css('color', 'black');
-    }
+    } // end else
 } // end updateMonthlyCosts
 
 function removeEmployeeHandler () {
@@ -72,4 +72,3 @@ function removeEmployeeHandler () {
     totalMonthlyCosts -= monthlyCostSaved;
     updateMonthlyCosts();
 } // end removeEmployeeHandler
-
