@@ -56,8 +56,9 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
     background-color: rgb(246, 251, 255);
 }
-tfoot {
 
+tfoot {
+    background-color: red;
 }
 
 #inputDiv {
