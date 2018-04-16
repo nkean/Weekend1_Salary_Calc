@@ -2,6 +2,17 @@ console.log('Javascript has loaded');
 
 let totalMonthlyCosts = 0;
 
+class Employee {
+    constructor ( ) {
+        this.firstName = $('#firstNameInput').val();
+        this.lastName = $('#lastNameInput').val();
+        this.employeeId = $('#employeeIdInput').val();
+        this.title = $('#employeeTitleInput').val();
+        this.annualSalary = Number($('#annualSalaryInput').val());
+        this.monthlySalary = this.annualSalary / 12;
+    }
+}
+
 $(document).ready(onReady);
 
 function onReady() {
