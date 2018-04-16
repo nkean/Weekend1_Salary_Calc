@@ -57,8 +57,8 @@ tr:nth-child(odd) {
     background-color: rgb(246, 251, 255);
 }
 
-tfoot {
-    background-color: red;
+tfoot tr {
+    background-color: #bebebe !important;
 }
 
 #inputDiv {
@@ -84,5 +84,5 @@ button {
 
 button:hover {
     background-color: #cccccc;
-
 }
+

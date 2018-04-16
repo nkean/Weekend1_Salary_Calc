@@ -1,7 +1,9 @@
 console.log('Javascript has loaded');
 
-let totalMonthlyCosts = 0;
+const maxBudget = 20000;
 let currentEmployees = [];
+let employeeAddId = 0;
+let uniqueId = true;
 
 class Employee {
     constructor () {
@@ -9,8 +11,9 @@ class Employee {
         this.lastName = $('#lastNameInput').val();
         this.employeeId = $('#employeeIdInput').val();
         this.title = $('#employeeTitleInput').val();
-        this.annualSalary = Number($('#annualSalaryInput').val()).toFixed(2);
-        this.monthlySalary = (this.annualSalary / 12).toFixed(2);
+        this.annualSalary = $('#annualSalaryInput').val();
+        this.monthlySalary = this.annualSalary / 12;
+        this.employeeAddId = employeeAddId;
     }
 }
 
@@ -25,9 +28,17 @@ function onReady () {
 
 function addEmployeeHandler () {
     console.log('addEmployeeButton clicked');
-    addNewEmployee();
-    updateMonthlyCosts();
-    clearInputs();
+    verifyUniqueId();
+    if ( uniqueId ) {
+        addNewEmployee();
+        updateMonthlyCosts();
+        clearInputs(); 
+    }
+    else {
+        $('#employeeIdInput').val('');
+        $('#employeeIdInput').attr('placeholder', 'ID already exists');
+        $('#employeeIdInput').css('background-color', 'lightcoral');
+    }
 } // end addEmployeeHander
 
 function addNewEmployee () {
@@ -38,10 +49,10 @@ function addNewEmployee () {
     let employeeSalary = '<td>$' + Number($('#annualSalaryInput').val()).toLocaleString('en') + '</td>';
     let removeButton = '<td><button class="removeEmployeeButton">Remove</button>';
     currentEmployees.push(new Employee);
-    let monthlySalary = currentEmployees[currentEmployees.length - 1].monthlySalary;
     $('#employeeList').append('<tr>' + firstName + lastName + employeeId + employeeTitle + employeeSalary + removeButton + '</tr>');
-    $('#employeeList tr:last').data("monthlyCost", monthlySalary);
-    console.log($('#employeeList tr:last').data("monthlyCost"));
+    $('#employeeList tr:last').data("employeeAddId", employeeAddId);
+    console.log($('#employeeList tr:last').data("employeeAddId"));
+    employeeAddId ++;
 } // end addNewEmployee
 
 function clearInputs () {
@@ -49,15 +60,19 @@ function clearInputs () {
     $('#lastNameInput').val('');
     $('#employeeIdInput').val('');
     $('#employeeTitleInput').val('');
-    $('#annualSalaryInput').val('');   
+    $('#annualSalaryInput').val('');
+    $('#employeeIdInput').attr('placeholder', 'ID');
+    $('#employeeIdInput').css('background-color', 'rgb(246, 251, 255)');
 } // end clearInputs
 
 function updateMonthlyCosts () {
-    let newEmployeeSalary = $('#annualSalaryInput').val();
-    totalMonthlyCosts += (newEmployeeSalary / 12); // add new employee monthly salary to total monthly costs
-    let monthlyCostFormatted = Number(totalMonthlyCosts.toFixed(2)).toLocaleString('en'); // format monthly costs to include commas for large numbers
+    let totalMonthlyCosts = 0;
+    for (i = 0; i<currentEmployees.length; i++) {
+        totalMonthlyCosts += Number(currentEmployees[i].monthlySalary);
+    }
+    let monthlyCostFormatted = totalMonthlyCosts.toLocaleString('en', {minimumFractionDigits: 2}); // format monthly costs to include commas for large numbers
     $('#totalMonthlyCosts').text('Total Monthly: $' + monthlyCostFormatted);
-    if (totalMonthlyCosts > 20000) {
+    if (totalMonthlyCosts > maxBudget) {
         $('#totalMonthlyCosts').css('color', 'red');
     } // end if
     else {
@@ -67,8 +82,25 @@ function updateMonthlyCosts () {
 
 function removeEmployeeHandler () {
     console.log('removeEmployeeButton clicked');
-    let monthlyCostSaved = $(this).parent().parent().data("monthlyCost");
+    let rowData = $(this).parent().parent().data("employeeAddId");
+    console.log(rowData);
+    for (i = 0; i<currentEmployees.length; i++) {
+        if ( currentEmployees[i].employeeAddId == rowData ) {
+            totalMonthlyCosts -= currentEmployees[i].monthlySalary;
+            currentEmployees.splice(i,1);
+        } // end if
+    } // end for
     $(this).parent().parent().remove();
-    totalMonthlyCosts -= monthlyCostSaved;
     updateMonthlyCosts();
 } // end removeEmployeeHandler
+
+function verifyUniqueId () {
+    for (i = 0; i<currentEmployees.length; i++) {
+        if (currentEmployees[i].employeeId == $('#employeeIdInput').val()) {
+            uniqueId = false;
+        } // end if
+        else if (currentEmployees[i].employeeId !== $('#employeeIdInput').val()) {
+            uniqueId = true;
+        } // end else if
+    } // end for
+} // end verifyUniqueId
